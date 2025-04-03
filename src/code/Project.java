@@ -1,5 +1,7 @@
 package code;
 
+import java.util.ArrayList;
+
 public class Project {
 	private String projectName;
 	private String neighbourhood;
@@ -13,8 +15,9 @@ public class Project {
 	private String application_closing_date;
 	private String HDB_Manager;
 	private int officer_slot;
-	private HDB_Officer[] officers;   //to be added separately from constructor
-	private int officer_size;
+	private ArrayList<HDB_Officer> officers;   //to be added separately from constructor
+	private boolean visibility;
+	private ArrayList<Enquiry> enquiries;
 	
 	public Project()
 	{
@@ -30,7 +33,8 @@ public class Project {
 		this.application_closing_date = "";
 		this.HDB_Manager = "";
 		this.officer_slot = 0;
-		this.officer_size = 0;
+		this.officers = new ArrayList<>();
+		this.enquiries = new ArrayList<>();
 	}
 	
 	public Project(String projectName, String neighbourhood, String t1, int nof1, int sp1, String t2, int nof2, int sp2, String aod, String acd, String Manager, int noo) 
@@ -47,11 +51,8 @@ public class Project {
 		this.application_closing_date = acd;
 		this.HDB_Manager = Manager;
 		this.officer_slot = noo;
-		
-		for (int i =0; i<noo; i++)
-		{
-			officers[i] = new HDB_Officer();
-		}
+		this.officers = new ArrayList<>();
+		this.enquiries = new ArrayList<>();
 	}
 	
 	//projectName get/set
@@ -98,22 +99,42 @@ public class Project {
     public void set_Officer_slot(int officer_slot) {this.officer_slot = officer_slot;}
 	
 	// Officer get/set 
-	public HDB_Officer[] get_officers(){return officers;}
-	public void add_officers(HDB_Officer officer)
+	public ArrayList<HDB_Officer> get_officers(){return officers;}
+	public void add_officer(HDB_Officer officer)
 	{
-		if (officer_size == officer_slot)
+		if (officers.size() >= officer_slot)
 		{
 			System.out.println("Maximum Number of Officers!");
 		}
 		else 
 		{
-			officers[officer_size] = officer;
-			officer_size++;
+			officers.add(officer);
 			System.out.println("Officer Added Successfully!");
 		}
 	}
 	
-	//officer_size get
-	public int get_officer_size() {return officer_size;}
+	
+	//visibility get/set
+	public boolean get_visibility() {return visibility;}
+	public void set_visibility(String on_off) {
+		if (on_off.equalsIgnoreCase("on")) {
+			visibility = true;
+		}
+		else if (on_off.equalsIgnoreCase("off")) {
+			visibility = false;
+		}
+		else {System.out.println("Invalid Input!");}
+	}
+	
+	
+	//Adding and Reading Enquires
+	public void add_Enquiry(Enquiry enquiry) {
+		enquiries.add(enquiry);
+	}
+	
+	public ArrayList<Enquiry> getEnquiries(){
+		return enquiries;
+	}
+	
 	
 }
