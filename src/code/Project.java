@@ -157,17 +157,17 @@ public class Project {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
-		 sb.append("Project Name: ").append(projectName).append("\n")
-         .append("Neighbourhood: ").append(neighbourhood).append("\n")
-         .append("Type 1: ").append(type_1).append(" (").append(number_of_flats_1).append(" flats, Price: $").append(sellingPrice1).append(")\n")
-         .append("Type 2: ").append(type_2).append(" (").append(number_of_flats_2).append(" flats, Price: $").append(sellingPrice2).append(")\n")
-         .append("Application Opening Date: ").append(application_opening_date).append("\n")
-         .append("Application Closing Date: ").append(application_closing_date).append("\n")
-         .append("HDB Manager: ").append(HDB_Manager).append("\n")
-         .append("Officer Slot: ").append(officer_slot).append("\n")
-         .append("Visibility: ").append(visibility ? "Open" : "Closed").append("\n")
-         .append("Number of Officers Assigned: ").append(officers.size()).append("\n")
-         .append("Total Enquiries: ").append(enquiries.size()).append("\n");
+	 	sb.append("Project Name: ").append(projectName).append("\n")
+         	.append("Neighbourhood: ").append(neighbourhood).append("\n")
+         	.append("Type 1: ").append(type_1).append(" (").append(number_of_flats_1).append(" flats, Price: $").append(sellingPrice1).append(")\n")
+         	.append("Type 2: ").append(type_2).append(" (").append(number_of_flats_2).append(" flats, Price: $").append(sellingPrice2).append(")\n")
+         	.append("Application Opening Date: ").append(application_opening_date).append("\n")
+         	.append("Application Closing Date: ").append(application_closing_date).append("\n")
+         	.append("HDB Manager: ").append(HDB_Manager).append("\n")
+	        .append("Officer Slot: ").append(officer_slot).append("\n")
+		.append("Visibility: ").append(visibility ? "Open" : "Closed").append("\n")
+	        .append("Number of Officers Assigned: ").append(officers.size()).append("\n")
+	        .append("Total Enquiries: ").append(enquiries.size()).append("\n");
 
        return sb.toString();
 	}
