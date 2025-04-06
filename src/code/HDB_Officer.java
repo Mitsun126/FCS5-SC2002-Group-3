@@ -187,11 +187,11 @@ public class HDB_Officer extends Applicant {
 		
 		System.out.println("Receipt for Applicant: " + applicant.get_Name());
 		System.out.println("NRIC: " + applicant.get_Nric());
-	    System.out.println("Age: " + applicant.get_Age());
-	    System.out.println("Marital Status: " + applicant.get_Marital_status());
-	    System.out.println("Flat Type Booked: " + applicant.getFlatType());
-	    System.out.println("Project Details: ");
-	    System.out.println(project);
+	    	System.out.println("Age: " + applicant.get_Age());
+	 	System.out.println("Marital Status: " + applicant.get_Marital_status());
+	    	System.out.println("Flat Type Booked: " + applicant.getFlatType());
+	 	System.out.println("Project Details: ");
+	 	System.out.println(project);
 	}
 	
 
