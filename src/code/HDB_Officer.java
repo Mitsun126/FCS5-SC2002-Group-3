@@ -102,7 +102,7 @@ public class HDB_Officer extends Applicant {
 	}
 	
 	//Check applicant's eligibility for chosen flat type
-	private boolean isElidibleForFlat(Applicant applicant, String flatType) {
+	private boolean isEligibleForFlat(Applicant applicant, String flatType) {
 		if (applicant.get_Marital_status().equalsIgnoreCase("Single") && applicant.get_Age() >= 35) {
 			return flatType.equalsIgnoreCase("2-Room");
 		} else if (applicant.get_Marital_status().equalsIgnoreCase("Married") && applicant.get_Age() >= 21) {
@@ -130,7 +130,7 @@ public class HDB_Officer extends Applicant {
 			return;
 		}
 		
-		boolean flatEligibility = isElidibleForFlat(applicant, flatType);
+		boolean flatEligibility = isEligibleForFlat(applicant, flatType);
 		if (!flatEligibility) {
 			System.out.println("Applicant is not eligible for selected flat type!");
 			return;
@@ -187,11 +187,11 @@ public class HDB_Officer extends Applicant {
 		
 		System.out.println("Receipt for Applicant: " + applicant.get_Name());
 		System.out.println("NRIC: " + applicant.get_Nric());
-	    	System.out.println("Age: " + applicant.get_Age());
-	 	System.out.println("Marital Status: " + applicant.get_Marital_status());
-	    	System.out.println("Flat Type Booked: " + applicant.getFlatType());
-	 	System.out.println("Project Details: ");
-	 	System.out.println(project);
+	    System.out.println("Age: " + applicant.get_Age());
+	    System.out.println("Marital Status: " + applicant.get_Marital_status());
+	    System.out.println("Flat Type Booked: " + applicant.getFlatType());
+	    System.out.println("Project Details: ");
+	    System.out.println(project);
 	}
 	
 
