@@ -7,6 +7,7 @@ public class Applicant extends User {
 	private String applicationStatus;
 	private ArrayList<Enquiry> enquiries;
 	private String flatType;
+	private boolean withdrawal_status;
 	
 	
 	public Applicant() {
@@ -14,6 +15,7 @@ public class Applicant extends User {
 		this.appliedProject = null;
 		this.applicationStatus = "";
 		this.enquiries = new ArrayList<>();
+		this.withdrawal_status = false;
 	}
 
 	public Applicant(String name, String NRIC, int age, String marital_status) {
@@ -21,6 +23,7 @@ public class Applicant extends User {
 		this.appliedProject = null;
 		this.applicationStatus = "";
 		this.enquiries = new ArrayList<>();
+		this.withdrawal_status = false;
 	}
 	
 	//Check eligibility based on martial status and age
@@ -80,16 +83,29 @@ public class Applicant extends User {
 		}
 	}
 	
-	//Withdrawal of application
-	public void withdrawApplication() {
+	//Get withdrawl_status
+	public boolean getWithdrawalStatus() {return withdrawal_status;}
+	
+	//Requesting for withdrawal
+	public void requestWithdrawal() {
+		withdrawal_status = true;
+	}
+	
+	//Withdrawal of application (For manager to use)
+	public boolean withdrawApplication() {
 		if (appliedProject == null) {
-			System.out.println("You have not applied for any project!");
-			return;
+			System.out.println("Applicant not applied for any project!");
+			return false;
+		} else if (withdrawal_status  == false) {
+			System.out.println("Applicant did not request for withdrawal!");
+			return false;
 		}
 		
 		appliedProject = null;
 		applicationStatus = "";
+		withdrawal_status = false;
 		System.out.println("Application withdrawn successfully!");
+		return true;
 	}
 	
 	
