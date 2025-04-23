@@ -159,7 +159,7 @@ public class Project {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
-		 sb.append("Project Name: ").append(projectName).append("\n")
+		 sb.append("\nProject Name: ").append(projectName).append("\n")
          .append("Neighbourhood: ").append(neighbourhood).append("\n")
          .append("Type 1: ").append(flat_1)
          .append("Type 2: ").append(flat_2)
