@@ -179,6 +179,7 @@ public class ApplicantUI {
             System.out.println("Enter your Enquiry Message: ");
             String message = scanner.nextLine();
             applicant.submitEnquiry(project, message);  // Submit the enquiry
+            return;
         } else {
             System.out.println("Invalid Project Name!\n");
         }
