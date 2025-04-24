@@ -31,7 +31,12 @@ public class HDB_Manager extends User {
         super(name, NRIC, age, marital_status, password);
         this.createdProjects = new ArrayList<>();
     }
-
+    
+    /**
+     * Gets the created projects array.
+     * 
+     * @return The createdProject array.
+     */
     public ArrayList<Project> getCreatedProjects(){return this.createdProjects;}
 
     /**
