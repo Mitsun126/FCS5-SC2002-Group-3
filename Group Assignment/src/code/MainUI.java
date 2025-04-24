@@ -42,16 +42,16 @@ public class MainUI {
         applicants = fileio.loadApplicants("data/ApplicantList.csv");
         officers = fileio.loadOfficers("data/OfficerList.csv");
         managers = fileio.loadManagers("data/ManagerList.csv");
-        projects = fileio.loadProjects("data/ProjectList.csv", officers);
+        projects = fileio.loadProjects("data/ProjectList.csv", officers, managers);
 
         int choice = -1;
         do {
             try {
-                System.out.println("Main Menu: ");
-                System.out.println("1. Login");
-                System.out.println("2. Exit");
-                System.out.print("Enter your choice: ");
-                choice = Integer.parseInt(scanner.nextLine());
+                System.out.println("\nMain Menu: ");
+				System.out.println("1. Login");
+		        System.out.println("2. Exit");
+		        System.out.print("Enter your choice: ");
+		        choice = Integer.parseInt(scanner.nextLine());
 
                 switch (choice) {
                     case 1:
@@ -65,13 +65,13 @@ public class MainUI {
                         fileio.saveProject("data/ProjectList.csv", projects);
                         break;
                     default:
-                        System.out.println("Invalid choice! Please try again!");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid type! Please enter a number.");
-            } catch (Exception e) {
-                System.out.println("An unexpected error occurred!");
-                e.printStackTrace();
+                        System.out.println("Invalid choice! Please try again!\n");
+		        }
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid type! Please try again!\n");
+			} catch (Exception e) {
+				System.out.println("An unexpected error occured!\n");
+				e.printStackTrace();
             }
         } while (choice != 2);
     }
@@ -89,7 +89,7 @@ public class MainUI {
 
         for (Applicant a : applicants) {
             if (a.get_Nric().equalsIgnoreCase(nric) && a.get_Password().equals(password)) {
-                System.out.println("Login successful as Applicant.");
+                System.out.println("Login successful as Applicant!\n");
                 new ApplicantUI(a, projects).showMenu();
                 return;
             }
@@ -97,7 +97,7 @@ public class MainUI {
 
         for (HDB_Officer o : officers) {
             if (o.get_Nric().equalsIgnoreCase(nric) && o.get_Password().equals(password)) {
-                System.out.println("Login successful as HDB Officer.");
+                System.out.println("Login successful as HDB Officer!\n");
                 new OfficerUI(o, projects).showMenu();
                 return;
             }
@@ -105,7 +105,7 @@ public class MainUI {
 
         for (HDB_Manager m : managers) {
             if (m.get_Nric().equalsIgnoreCase(nric) && m.get_Password().equals(password)) {
-                System.out.println("Login successful as HDB Manager.");
+                System.out.println("Login successful as HDB Manager!\n");
                 new ManagerUI(m, projects, applicants).showMenu();
                 return;
             }
