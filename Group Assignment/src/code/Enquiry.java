@@ -10,11 +10,12 @@ public class Enquiry {
     // Static counter for generating unique enquiry IDs
     private static int idCounter = 1;
 
-    private int enquiryID;          // Unique ID for the enquiry
-    private String applicantNRIC;   // NRIC of the applicant making the enquiry
-    private String projectName;     // Name of the project related to the enquiry
-    private String enquiryText;     // The content of the enquiry
-    private String reply;           // The reply to the enquiry, if any
+    private int enquiryID;            // Unique ID for the enquiry
+    private String applicantNRIC;     // NRIC of the applicant making the enquiry
+    private String projectName;       // Name of the project related to the enquiry
+    private String enquiryText;       // The content of the enquiry
+    private String reply;             // The reply to the enquiry, if any
+    private boolean isClosed = false; // The status of the enquiry
 
     /**
      * Constructor to create an enquiry object.
@@ -73,8 +74,10 @@ public class Enquiry {
      * @param enquiryText The new content of the enquiry.
      */
     public void setEnquiryText(String enquiryText) {
-        this.enquiryText = enquiryText;
-    }
+       if (!this.isClosed)
+			this.enquiryText = enquiryText;
+		else System.out.println("This enquiry is already closed!\n");
+	}
 
     /**
      * Gets the reply to the enquiry.
@@ -91,8 +94,12 @@ public class Enquiry {
      * @param reply The reply to the enquiry.
      */
     public void setReply(String reply) {
-        this.reply = reply;
-    }
+        if (!this.isClosed) {
+			this.reply = reply; 
+			this.isClosed = true;
+		} else System.out.println("This enquiry is already closed!\n");
+		
+	}
 
     /**
      * Returns a string representation of the enquiry, including its ID, project name, 
