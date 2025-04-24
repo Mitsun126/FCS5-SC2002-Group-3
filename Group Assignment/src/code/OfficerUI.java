@@ -68,7 +68,7 @@ public class OfficerUI {
     public void showOfficerFunctions() {
         int choice;
         do {
-            System.out.println("Officer Functionalities: ");
+            System.out.println("\nOfficer Functionalities: ");
             System.out.println("1. View All Available Projects");
             System.out.println("2. Register for Project");
             System.out.println("3. View Registered Projects");
