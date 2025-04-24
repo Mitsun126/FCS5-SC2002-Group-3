@@ -32,6 +32,8 @@ public class HDB_Manager extends User {
         this.createdProjects = new ArrayList<>();
     }
 
+    public ArrayList<Project> getCreatedProjects(){return this.createdProjects;}
+
     /**
      * Creates a new project and adds it to the list of created projects.
      * 
@@ -202,7 +204,7 @@ public class HDB_Manager extends User {
         boolean success = applicant.withdrawApplication();
         Project project = applicant.getAppliedProject();
 
-        if (success) {
+        if (success == true && project != null) {
             System.out.println("Withdrawal approved!");
             project.removeApplicant(applicant);
         } else {
