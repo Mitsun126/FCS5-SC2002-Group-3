@@ -1,41 +1,27 @@
 package code;
 
+/**
+ * This class represents an enquiry made by an applicant for a project. 
+ * It includes the enquiry ID, applicant NRIC, project name, the enquiry text,
+ * and the reply to the enquiry.
+ */
 public class Enquiry {
-	private static int idCounter = 1;
-	private int enquiryID;
-	private String applicantNRIC;
-	private String projectName;
-	private String enquiryText;
-	private String reply;
-	
-	public Enquiry(String applicantNRIC, String projectName, String enquiryText) {
-		this.enquiryID = idCounter++;
-		this.applicantNRIC = applicantNRIC;
-		this.projectName = projectName;
-		this.enquiryText = enquiryText;
-		this.reply = "";
-	}
-	
-	//enquiryID get
-	public int getEnquiryID() {return enquiryID;}
-	
-	//applicantNRIC get
-	public String getApplicantNRIC() {return applicantNRIC;}
-	
-	//projectName get
-	public String getProjectName() {return projectName;}
-	
-	//enquiryTect get/set
-	public String getEnquiryText() {return enquiryText;}
-	public void setEnquiryText(String enquiryText) {this.enquiryText = enquiryText;}
-	
-	//reply get/set
-	public String getReply() {return reply;}
-	public void setReply(String reply) {this.reply = reply;}
-	
-	//printing details
-	public String toString() {
-		return "EnquiryID: " + enquiryID + "\nProject: " + projectName + "\nEnquiry: " + enquiryText + "\nReply: " + (reply.isEmpty() ? "No Reply": reply);
-	}
-	
-}
+    
+    // Static counter for generating unique enquiry IDs
+    private static int idCounter = 1;
+
+    private int enquiryID;          // Unique ID for the enquiry
+    private String applicantNRIC;   // NRIC of the applicant making the enquiry
+    private String projectName;     // Name of the project related to the enquiry
+    private String enquiryText;     // The content of the enquiry
+    private String reply;           // The reply to the enquiry, if any
+
+    /**
+     * Constructor to create an enquiry object.
+     * 
+     * @param applicantNRIC The NRIC of the applicant making the enquiry.
+     * @param projectName The name of the project related to the enquiry.
+     * @param enquiryText The content of the enquiry.
+     */
+    public Enquiry(String applicantNRIC, String projectName, String enquiryText) {
+        this.enquiryID = idCounter++;   // Assign a unique enquiry ID
