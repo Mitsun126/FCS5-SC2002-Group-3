@@ -1,6 +1,5 @@
 package code;
 
-import java.io.*;
 import java.util.*;
 
 public class MainUI {
@@ -9,64 +8,47 @@ public class MainUI {
 	private static ArrayList<HDB_Manager> managers = new ArrayList<>();
 	private static ArrayList<Project> projects = new ArrayList<>();
 	private static Scanner scanner = new Scanner(System.in);
+	private static FileIO fileio = new FileIO();
 	//I need help with filter! map<NRIC, filter>
 	//private static Map<String, String> userProjectFilters = new HashMap<>();
 
 	public static void main(String[] args) {
-		loadApplicants();
-		loadOfficers();
-		loadManagers();
-		loadProjects();
-		
-		Applicant newApplicant1 = new Applicant("John", "S1234567A", 35, "Single", "password");
-		Applicant newApplicant2 = new Applicant("Sarah", "T7654321B", 40, "Married", "password");
-		Applicant newApplicant3 = new Applicant("Grace", "S9876543C", 37, "Married", "password");
-		Applicant newApplicant4 = new Applicant("James", "T2345678D", 30, "Married", "password");
-		Applicant newApplicant5 = new Applicant("Rachel", "S3456789E", 25, "Single", "password");
-		applicants.add(newApplicant5);
-		applicants.add(newApplicant4);
-		applicants.add(newApplicant3);
-		applicants.add(newApplicant2);
-		applicants.add(newApplicant1);
-		
-		HDB_Officer officer1 = new HDB_Officer("Daniel", "T2109876H", 36, "Single", "password");
-		HDB_Officer officer2 = new HDB_Officer("Emily", "S6543210I", 28, "Single", "password");
-		HDB_Officer officer3 = new HDB_Officer("David", "T1234567J", 29, "Married", "password");
-		officers.add(officer3);
-		officers.add(officer2);
-		officers.add(officer1);
-		
-		HDB_Manager manager1 = new HDB_Manager("Michael", "T8765432F", 36, "Single", "password");
-		HDB_Manager manager2 = new HDB_Manager("Jessica", "S5678901G", 26, "Married", "password");
-		managers.add(manager2);
-		managers.add(manager1);
-		
-		Project newproject = new Project("Acacia Breeze", "Yishun", "2-Room", 2, 350000, "3-Room", 3, 450000, "15/2/2025", "20/3/2025", "Jessica", 3);
-		newproject.add_officer(officer1);
-		newproject.add_officer(officer2);
-		
-		projects.add(newproject);
-		
-		
-		int choice;
+		applicants = fileio.loadApplicants("data/ApplicantList.csv");
+		officers = fileio.loadOfficers("data/OfficerList.csv");
+		managers = fileio.loadManagers("data/ManagerList.csv");
+		projects = fileio.loadProjects("data/ProjectList.csv", officers);
+				
+		int choice = -1;
 		do {
-			System.out.println("Main Menu: ");
-			System.out.println("1. Login");
-	        System.out.println("2. Exit");
-	        System.out.print("Enter your choice: ");
-	        choice = Integer.parseInt(scanner.nextLine());
-	        
-	        switch(choice) {
-		        case 1:
-		        	login();
-		        	break;
-	        	case 2:
-	        		System.out.println("Exiting System...");
-	        		break;
-                default:
-                    System.out.println("Invalid choice! Please try again.");
-	        }
-		} while(choice!=2);
+			try {
+				System.out.println("Main Menu: ");
+				System.out.println("1. Login");
+		        System.out.println("2. Exit");
+		        System.out.print("Enter your choice: ");
+		        choice = Integer.parseInt(scanner.nextLine());
+		        
+		        switch(choice) {
+			        case 1:
+			        	login();
+			        	break;
+		        	case 2:
+		        		System.out.println("Exiting System...");
+		        		fileio.saveApplicant("data/ApplicantList.csv", applicants);
+		        		fileio.saveOfficer("data/OfficerList.csv", officers);
+		        		fileio.saveManager("data/ManagerList.csv", managers);
+		        		fileio.saveProject("data/ProjectList.csv", projects);
+		        		break;
+	                default:
+	                    System.out.println("Invalid choice! Please try again!");
+		        }
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid type! Please try again!");
+			} catch (Exception e) {
+				System.out.println("An unexpected error occured!");
+				e.printStackTrace();
+			}
+		}while(choice!=2);
+		
 
 	}
 	
@@ -103,74 +85,5 @@ public class MainUI {
         System.out.println("Login failed! Check your NRIC or password!");
     }
 	
-	
-	private static void loadApplicants() {
-		try (BufferedReader br = new BufferedReader(new FileReader("/Project/ApplicantList.csv"))){
-			String line;
-			while ((line = br.readLine()) != null) {
-				System.out.println(line);
-				String[] tokens = line.split(",");
-				applicants.add(new Applicant(tokens[0], tokens[1], Integer.parseInt(tokens[2]), tokens[3], tokens[4]));
-			}
-			System.out.println("Applicants load successfully!");
-		} catch (IOException e) {
-			System.out.println("Failed to load Applicants!");
-		}
-	}
-	
-	private static void loadOfficers() {
-		try (BufferedReader br = new BufferedReader(new FileReader("/Project/ManagerList.csv"))){
-			String line;
-			while ((line = br.readLine()) != null) {
-				String[] tokens = line.split(",");
-				officers.add(new HDB_Officer(tokens[0], tokens[1], Integer.parseInt(tokens[2]), tokens[3], tokens[4]));
-			}
-			System.out.println("Officers load successfully!");
-			
-		} catch (IOException e) {
-			System.out.println("Failed to load Officers!");
-		}
-	}
-	
-	private static void loadManagers() {
-		try (BufferedReader br = new BufferedReader(new FileReader("/Project/ManagerList.csv"))){
-			String line;
-			while ((line = br.readLine()) != null) {
-				String[] tokens = line.split(",");
-				managers.add(new HDB_Manager(tokens[0], tokens[1], Integer.parseInt(tokens[2]), tokens[3], tokens[4]));
-			}
-			System.out.println("Managers load successfully!");
-			
-		} catch (IOException e) {
-			System.out.println("Failed to load Managers!");
-		}
-	}
-	
-	private static void loadProjects() {
-        try (BufferedReader br = new BufferedReader(new FileReader("/Project/ProjectList.csv"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] tokens = line.split(",");
-                Project p = new Project(
-                    tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]),
-                    tokens[5], Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]),
-                    tokens[8], tokens[9], tokens[10], Integer.parseInt(tokens[11])
-                );
-                String[] assignedOfficers = tokens[12].split(",");
-                
-                for (int i=0; i < assignedOfficers.length; i++) {
-                	for (HDB_Officer o: officers) {
-                		if (o.get_Name().equalsIgnoreCase(assignedOfficers[i])){
-                			p.add_officer(o);
-                			break;
-                		}
-                	}
-                }
-                projects.add(p);
-            }
-        } catch (IOException e) {
-            System.out.println("Failed to load projects!");
-        }
-    }
 
 }
