@@ -81,35 +81,52 @@ public class FileIO {
      * @param officers The list of officers to be associated with projects.
      * @return A list of Projects.
      */
-    public ArrayList<Project> loadProjects(String filename, ArrayList<HDB_Officer> officers) {
-        ArrayList<Project> projects = new ArrayList<>();
-        try(Scanner sc = new Scanner(new File(filename))) {
-            if (sc.hasNextLine()) sc.nextLine(); // Skip header line
-            while (sc.hasNextLine()) {
-                String[] tokens = sc.nextLine().split(",");
+    public ArrayList<Project> loadProjects(String filename, ArrayList<HDB_Officer> officers, ArrayList<HDB_Manager> managers) {
+		ArrayList<Project> projects = new ArrayList<>();
+		try(Scanner sc = new Scanner(new File(filename))){
+			if (sc.hasNextLine()) sc.nextLine(); //skip header line
+			while (sc.hasNextLine()) {
+				String[] tokens = sc.nextLine().split(",");
                 Project p = new Project(
                     tokens[0], tokens[1], tokens[2], Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]),
                     tokens[5], Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]),
                     tokens[8], tokens[9], tokens[10], Integer.parseInt(tokens[11])
                 );
                 
-                // Associate officers with the project
-                for (int j = 12; j < tokens.length; j++) {
-                    String name = tokens[j].trim();
-                    String cleanName = name.replace("\"", "").trim();
-                    for (HDB_Officer o : officers) {
-                        if (o.get_Name().equalsIgnoreCase(cleanName)) {
-                            p.add_officer(o);
-                            break;
-                        }
-                    }
+                if (tokens.length > 12) {
+                	ArrayList<HDB_Officer> officerToAdd = new ArrayList<>();
+                	// Associate officers with the project
+	                for (int j = 12; j<tokens.length;j++) {
+	                	String name = tokens[j].trim();
+	                	String cleanName = name.replace("\"", "").trim();
+	                	for (HDB_Officer o : officers) {
+	                		if (o.get_Name().equalsIgnoreCase(cleanName)) {
+	                			p.add_officer(o);
+	                			officerToAdd.add(o);
+	                			break;
+	                		}
+	                	}
+	                }
+	                for (HDB_Officer officer : officerToAdd) {
+	                	officer.get_officerProjects().add(p);
+	                }
                 }
-                projects.add(p);
+                
+               String managerName = p.get_HDB_Manager();
+               for (HDB_Manager manager: managers) {
+            	   if (manager.get_Name().equalsIgnoreCase(managerName)) {
+            		   manager.getCreatedProjects().add(p);
+            	   }
+               }
+                
+               projects.add(p);
             }
-            System.out.println("Projects loaded successfully!");
+			System.out.println("Projects loaded successfully!");
+			
         } catch (IOException e) {
             System.out.println("Failed to load projects!");
         }
+        
         return projects;
     }
     
