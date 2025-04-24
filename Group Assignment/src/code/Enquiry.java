@@ -101,6 +101,15 @@ public class Enquiry {
 		
 	}
 
+	 /**
+     * Gets the closed status of the  enquiry
+     * 
+     * @return The closed status to the enquiry.
+     */
+    public boolean getIsClosed() {
+        return isClosed;
+    }
+
     /**
      * Returns a string representation of the enquiry, including its ID, project name, 
      * enquiry text, and reply. If no reply has been given, it displays "No Reply".
