@@ -13,7 +13,6 @@ This is a Java-based BTO Management System designed to implement an application 
 - View submitted enquiries
 - Edit enquiries by ID
 - Delete enquiries that are not closed
-- Set and get flat types
 - Display personal profile and application summary
 
 ## HDB Officer – Deals with applicants and project inquiries
