@@ -18,22 +18,20 @@ This is a Java-based BTO Management System designed to implement an application 
 ## HDB Officer – Deals with applicants and project inquiries
 - Implement Applicant features
 - Request assignment to projects
-- Get assigned to projects by a manager
 - View project details of assigned projects
-- View all requests for assigned projects
-- Respond to ID enquiries
-- Book flats for successful applicants in case assigned to the project
+- View all enquiries for assigned projects
+- Respond to enquiries by ID
+- Book flats for successful applicants for assigned projects
 - Generate receipts for applicant bookings
-- Track all projects assigned
 
 ## HDB Manager – Oversees project and officer assignments
 - Create new projects with elaborate configurations
-- Modify project details like name, flat type, dates, and prices
+- Modify project details
 - Delete projects from their created list
 - Toggle project visibility
-- View all projects or their own projects
-- View and respond to enquiries on whichever project they created
-- Approve officers for applied project assignments
-- Approve or reject project applicants and allocate application status
-- Accept applicant withdrawal requests and update application/project status
-- Create filtered reports on candidates
+- View all projects
+- View and respond to enquiries on projects they created
+- Approve officers's request of project assignment
+- Approve or reject applicants' application of project
+- Accept applicant withdrawal requests
+- Create filtered reports on applicants
