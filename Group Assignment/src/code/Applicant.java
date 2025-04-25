@@ -27,6 +27,10 @@ public class Applicant extends User {
     /** Utility to check if the applicant is eligible for a project */
     private EligibilityChecker eligibilityChecker = new EligibilityChecker();
 
+    private String filterType = "";
+    private String filterValue = "";
+	
+
     /**
      * Default constructor for creating an empty applicant.
      */
