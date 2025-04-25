@@ -35,7 +35,7 @@ public class ApplicantUI {
         int choice;
         do {
             System.out.println("\nApplicant Menu: ");
-			System.out.println("1. View Available Projects");
+		System.out.println("1. View Available Projects");
 	        System.out.println("2. Apply for Project");
 	        System.out.println("3. View My Application Status");
 	        System.out.println("4. Submit Enquiry");
@@ -78,19 +78,18 @@ public class ApplicantUI {
                     requestWithdrawApplication();
                     break;
                 case 9:
-                	changePassword();
-                	break;
+		    changePassword();
+		    break;
                 case 10:
-                	System.out.println("Possible Filter Type: NeighbourHood, Flat Type, Selling Price");
-                	System.out.println("Enter Filter Type: ");
-                	String filterType = scanner.nextLine();
-                	
-                	System.out.println("Enter Filter Value: ");
-                	String filterValue = scanner.nextLine();
-                	applicant.setFilterType(filterType);
-                	applicant.setFilterValue(filterValue);
-                	
-                	break;
+		    System.out.println("Possible Filter Type: NeighbourHood, Flat Type, Selling Price");
+		    System.out.println("Enter Filter Type: ");
+		    String filterType = scanner.nextLine();
+		
+		    System.out.println("Enter Filter Value: ");
+		    String filterValue = scanner.nextLine();
+		    applicant.setFilterType(filterType);
+		    applicant.setFilterValue(filterValue);
+		    break;
                 case 11:
                     System.out.println("Exiting Page...\n");
                     break;
