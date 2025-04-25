@@ -121,7 +121,13 @@ public class FileIO {
                 
                projects.add(p);
             }
-			System.out.println("Projects loaded successfully!");
+		Collections.sort(projects, new Comparator<Project>(){
+			@Override
+			public int compare(Project p1, Project p2) {
+				return p1.get_ProjectName().compareToIgnoreCase(p2.get_ProjectName());
+				}
+			});
+		System.out.println("Projects loaded successfully!");
 			
         } catch (IOException e) {
             System.out.println("Failed to load projects!");
