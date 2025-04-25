@@ -1,48 +1,40 @@
 # FCS5-SC2002-Group-3
 # BTO Management System
 
-The **BTO Management System** is a Java-based application designed to support multiple user roles and interactions, each with appropriate workflows and functionalities. This system is intended to streamline processes for applicants, HDB officers, and HDB managers within the Build-To-Order (BTO) system.
+This is a Java-based BTO Management System designed to implement an application that supports multiple user roles and interactions with appropriate workflows.
 
-## Features
+## Applicant – Public user who applies for flats
+- Consider open and eligible projects by their profile
+- Apply for a project if you are qualified and haven't applied yet
+- Check application status
+- Request withdrawal from a project
+- Withdraw application if already applied for
+- Submit enquiries related to projects
+- View submitted enquiries
+- Edit enquiries by ID
+- Delete enquiries that are not closed
+- Set and get flat types
+- Display personal profile and application summary
 
-### **Applicant**
-- **View Projects**: Consider open and eligible projects based on the applicant's profile.
-- **Apply for Projects**: Apply for a project if eligible and have not yet applied.
-- **Check Application Status**: Track the status of submitted applications.
-- **Withdraw Application**: Request withdrawal from a project if already applied.
-- **Submit Enquiries**: Submit enquiries related to projects.
-- **View Enquiries**: View submitted enquiries.
-- **Edit Enquiries**: Edit enquiries by ID.
-- **Delete Enquiries**: Delete enquiries that are not yet closed.
-- **Set and Get Flat Types**: Manage preferred flat types.
-- **Profile and Summary**: Display personal profile and application summary.
+## HDB Officer – Deals with applicants and project inquiries
+- Implement Applicant features
+- Request assignment to projects
+- Get assigned to projects by a manager
+- View project details of assigned projects
+- View all requests for assigned projects
+- Respond to ID enquiries
+- Book flats for successful applicants in case assigned to the project
+- Generate receipts for applicant bookings
+- Track all projects assigned
 
-### **HDB Officer**
-- **Applicant Features**: Implements all features available to applicants (apply, check status, withdraw, etc.).
-- **Request Project Assignment**: Request assignment to projects, and get assigned by a manager.
-- **View Assigned Projects**: View details of assigned projects.
-- **View All Requests**: View all requests for the assigned projects.
-- **Respond to Enquiries**: Respond to applicant enquiries by ID.
-- **Book Flats**: Book flats for successful applicants, if assigned to the project.
-- **Generate Receipts**: Generate receipts for applicant bookings.
-- **Track Assigned Projects**: Track all projects assigned to the officer.
-
-### **HDB Manager**
-- **Project Management**: Create new projects with elaborate configurations, modify project details (name, flat type, dates, prices), and delete projects.
-- **Toggle Project Visibility**: Change the visibility of projects as required.
-- **View Projects**: View all projects or only those created by the manager.
-- **Manage Enquiries**: View and respond to enquiries on projects created by the manager.
-- **Approve Officers**: Approve officers for project assignments.
-- **Manage Applicants**: Approve or reject applicants for projects and allocate application statuses.
-- **Track Withdrawals**: Accept applicant withdrawal requests and update project status.
-- **Filtered Reports**: Generate filtered reports on candidates based on specific criteria.
-
-## Requirements
-- **Java 8+**
-- IDE like IntelliJ IDEA or Eclipse
-- Git for version control
-
-## Installation
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/BTO-Management-System.git
+## HDB Manager – Oversees project and officer assignments
+- Create new projects with elaborate configurations
+- Modify project details like name, flat type, dates, and prices
+- Delete projects from their created list
+- Toggle project visibility
+- View all projects or their own projects
+- View and respond to enquiries on whichever project they created
+- Approve officers for applied project assignments
+- Approve or reject project applicants and allocate application status
+- Accept applicant withdrawal requests and update application/project status
+- Create filtered reports on candidates
