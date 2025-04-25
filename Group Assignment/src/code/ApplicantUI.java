@@ -35,16 +35,17 @@ public class ApplicantUI {
         int choice;
         do {
             System.out.println("\nApplicant Menu: ");
-            System.out.println("1. View Available Projects");
-            System.out.println("2. Apply for Project");
-            System.out.println("3. View My Application Status");
-            System.out.println("4. Submit Enquiry");
-            System.out.println("5. View My Enquiries");
-            System.out.println("6. Edit Enquiry");
-            System.out.println("7. Delete Enquiry");
-            System.out.println("8. Request for Withdrawal of Application");
-            System.out.println("9. Change Password");
-            System.out.println("10. Back");
+			System.out.println("1. View Available Projects");
+	        System.out.println("2. Apply for Project");
+	        System.out.println("3. View My Application Status");
+	        System.out.println("4. Submit Enquiry");
+	        System.out.println("5. View My Enquiries");
+	        System.out.println("6. Edit Enquiry");
+	        System.out.println("7. Delete Enquiry");
+	        System.out.println("8. Request for Withdrawal of Application");
+	        System.out.println("9. Change Password");
+	        System.out.println("10. Set Filter");
+	        System.out.println("11. Back");
 
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
@@ -77,15 +78,26 @@ public class ApplicantUI {
                     requestWithdrawApplication();
                     break;
                 case 9:
-                    changePassword();
-                    break;
+                	changePassword();
+                	break;
                 case 10:
+                	System.out.println("Possible Filter Type: NeighbourHood, Flat Type, Selling Price");
+                	System.out.println("Enter Filter Type: ");
+                	String filterType = scanner.nextLine();
+                	
+                	System.out.println("Enter Filter Value: ");
+                	String filterValue = scanner.nextLine();
+                	applicant.setFilterType(filterType);
+                	applicant.setFilterValue(filterValue);
+                	
+                	break;
+                case 11:
                     System.out.println("Exiting Page...\n");
                     break;
                 default:
                     System.out.println("Invalid choice! Please try again!\n");
-            }
-        } while(choice != 10);  // Continue showing the menu until the user exits
+	        }
+		} while(choice!=11);  // Continue showing the menu until the user exits
     }
     
     /**
@@ -114,17 +126,47 @@ public class ApplicantUI {
      * It filters the list to only show open projects.
      */
     private void viewProjects() {
-        System.out.println("Viewing Available Projects: ");
-        ArrayList<Project> openProjects = applicant.viewOpenProjects(projects);
-        
-        if (openProjects.isEmpty()) {
-            System.out.println("No Projects Available!\n");
-        } else {
-            for (Project p: openProjects) {
-                System.out.println(p);  // Display each open project
+		System.out.println("Viewing Available Projects: ");
+		ArrayList<Project> openProjects = applicant.viewOpenProjects(projects);
+		
+		if (openProjects.isEmpty()) {
+			System.out.println("No Projects Available!\n");
+		}
+		else {
+			String filterType = applicant.getFilterType();
+			String filterValue = applicant.getFilterValue();
+			
+			if (filterType != "" && filterValue != "" && !filterType.isEmpty() && !filterValue.isEmpty()) {
+				openProjects.removeIf(project -> {
+					switch (filterType.toLowerCase()) {
+					case "neighbourhood":
+						return !project.get_Neighbourhood().equalsIgnoreCase(filterValue);
+					case "flat type":
+						Flat flat1 = project.get_flat_1();
+						Flat flat2 = project.get_flat_2();
+						boolean matchFlat1 = flat1 != null && flat1.get_type().equalsIgnoreCase(filterValue);
+						boolean matchFlat2 = flat1 != null && flat2.get_type().equalsIgnoreCase(filterValue);
+						return !(matchFlat1 || matchFlat2);
+					case "selling price":
+						try {
+							int maxPrice = Integer.parseInt(filterValue);
+							Flat f1 = project.get_flat_1();
+							Flat f2 = project.get_flat_2();
+							boolean matchPrice1 = f1 != null && f1.get_sellingPrice() <= maxPrice;
+							boolean matchPrice2 = f2 != null && f2.get_sellingPrice() <= maxPrice;
+							return !(matchPrice1 || matchPrice2);
+						} catch (NumberFormatException e) {
+							System.out.println("Invalid selling price filter value! Skipping filter!\n");
+							return false;
+						}
+						default:
+							return false;
+					} 
+				});
             }
-        }
-    }
+			for (Project p: openProjects) System.out.println(p);
+		}
+	}
     
     /**
      * Allows the applicant to apply for a project by entering its name.
