@@ -59,6 +59,10 @@ public class Applicant extends User {
         this.withdrawal_status = false;
     }
 
+   public String getFilterType() {return this.filterType;}
+   public void setFilterType(String filterType) {this.filterType = filterType;}
+   public String getFilterValue() {return this.filterValue;}
+   public void setFilterValue(String filterValue) {this.filterValue = filterValue;}
     /**
      * Returns a list of open and eligible projects for the applicant.
      *
