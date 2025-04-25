@@ -56,11 +56,32 @@ public class HDB_Manager extends User {
      * @return The created project.
      */
     public Project createProject(String projectName, String neighbourhood, String t1, int nof1, int sp1, String t2, int nof2, int sp2, String aod, String acd, int noo) {
-        Project newProject = new Project(projectName, neighbourhood, t1, nof1, sp1, t2, nof2, sp2, aod, acd, this.get_Name(), noo);
-        createdProjects.add(newProject);
-        System.out.println("Project created Successfully!");
-        return newProject;
-    }
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate newStart = LocalDate.parse(aod, formatter);
+		LocalDate newEnd = LocalDate.parse(acd,formatter);
+		
+		for (Project existing : createdProjects) {
+			
+			if (existing.get_ProjectName().equalsIgnoreCase(projectName)) {
+				System.out.println("Project name has already been used!\n");
+				return null;
+			}
+			
+			LocalDate existingStart = LocalDate.parse(existing.get_Application_opening_date(),formatter);
+			LocalDate existingEnd = LocalDate.parse(existing.get_Application_closing_date(),formatter);
+			
+			if (!(newEnd.isBefore(existingStart) || existingEnd.isBefore(newStart))) { 
+				System.out.println("Project clashes with existing project!\n");
+				return null;
+			}
+		}
+		
+		Project newProject = new Project(projectName, neighbourhood, t1, nof1, sp1, t2, nof2, sp2, aod, acd, this.get_Name(), noo);
+		createdProjects.add(newProject);
+		System.out.println("Project created Successfully!\n");
+		return newProject;
+	}
 
     /**
      * Edits a project field by changing its value.
